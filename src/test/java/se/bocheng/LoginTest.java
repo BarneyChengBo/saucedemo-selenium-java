@@ -11,24 +11,27 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import se.bocheng.pages.LoginPage;
+
 import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginTest {
     private WebDriver driver;
+    private LoginPage loginPage;
 
     @BeforeEach
     void setUp() {
         driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com");
+        loginPage = new LoginPage(driver);
+        loginPage.open();
+
     }
 
     @Test
     void standardUserCanLogin() {
-        driver.findElement(By.id("user-name")).sendKeys("standard_user");
-        driver.findElement(By.id("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).click();
+        loginPage.loginAs("standard_user","secret_sauce");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("inventory_item")));
@@ -44,13 +47,12 @@ public class LoginTest {
             "standard_user, '', 'Epic sadface: Password is required'"
     })
     void invalidLoginShowsErrorMessage(String username, String password, String expectedError) {
-        driver.findElement(By.id("user-name")).sendKeys(username);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("login-button")).click();
 
-        WebElement errorMessage = driver.findElement(By.cssSelector("[data-test='error']"));
-        assertThat(errorMessage.isDisplayed()).isTrue();
-        assertThat(errorMessage.getText()).isEqualTo(expectedError);
+        loginPage.loginAs(username,password);
+
+        String errorMessage = loginPage.getErrorMessage();
+        assertThat(loginPage.isErrorDisplayed()).isTrue();
+        assertThat(errorMessage).isEqualTo(expectedError);
     }
 
     @AfterEach
