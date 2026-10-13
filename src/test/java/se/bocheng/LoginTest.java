@@ -5,14 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import se.bocheng.pages.InventoryPage;
 import se.bocheng.pages.LoginPage;
-
-import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,12 +26,9 @@ public class LoginTest {
 
     @Test
     void standardUserCanLogin() {
-        loginPage.loginAs("standard_user","secret_sauce");
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("inventory_item")));
-
-        assertThat(driver.findElements(By.className("inventory_item"))).isNotEmpty();
+        loginPage.loginAs("standard_user", "secret_sauce");
+        InventoryPage inventoryPage = new InventoryPage(driver);
+        assertThat(inventoryPage.isLoaded()).isTrue();
     }
 
     @ParameterizedTest
@@ -47,7 +40,7 @@ public class LoginTest {
     })
     void invalidLoginShowsErrorMessage(String username, String password, String expectedError) {
 
-        loginPage.loginAs(username,password);
+        loginPage.loginAs(username, password);
 
         String errorMessage = loginPage.getErrorMessage();
         assertThat(loginPage.isErrorDisplayed()).isTrue();
