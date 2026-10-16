@@ -1,27 +1,22 @@
 package se.bocheng;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import se.bocheng.pages.InventoryPage;
 import se.bocheng.pages.LoginPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginTest {
-    private WebDriver driver;
+public class LoginTest extends BaseTest {
+
     private LoginPage loginPage;
 
     @BeforeEach
-    void setUp() {
-        driver = new ChromeDriver();
+    void openLoginPage() {
         loginPage = new LoginPage(driver);
         loginPage.open();
-
     }
 
     @Test
@@ -47,8 +42,5 @@ public class LoginTest {
         assertThat(errorMessage).isEqualTo(expectedError);
     }
 
-    @AfterEach
-    void tearDown() {
-        driver.quit();
-    }
+
 }
