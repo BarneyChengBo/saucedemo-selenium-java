@@ -22,7 +22,7 @@ public class CartPage {
         return driver.findElements(cartItems).size();
     }
 
-    public void checkOut() {
+    public void checkout() {
         driver.findElement(checkoutButton).click();
     }
 

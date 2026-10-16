@@ -19,18 +19,25 @@ public class PurchaseTest extends BaseTest {
     @Test
     void standardUserCanCompletePurchase() {
         loginPage.loginAs("standard_user", "secret_sauce");
+
         InventoryPage inventoryPage = new InventoryPage(driver);
         assertThat(inventoryPage.isLoaded()).isTrue();
         inventoryPage.addBackpackToCart();
         inventoryPage.openCart();
+
         CartPage cartPage = new CartPage(driver);
         assertThat(cartPage.getItemCount()).isEqualTo(1);
-        cartPage.checkOut();
+        cartPage.checkout();
+
         CheckoutInfoPage checkoutInfoPage = new CheckoutInfoPage(driver);
         checkoutInfoPage.fillInformation("Hemming","Cheng","72345");
         checkoutInfoPage.clickContinue();
+
         CheckoutOverviewPage checkoutOverviewPage = new CheckoutOverviewPage(driver);
         checkoutOverviewPage.clickFinish();
+
+        CheckoutCompletePage checkoutCompletePage = new CheckoutCompletePage(driver);
+        assertThat(checkoutCompletePage.getCompleteHeader()).isEqualTo("Thank you for your order!");
     }
 
 }
