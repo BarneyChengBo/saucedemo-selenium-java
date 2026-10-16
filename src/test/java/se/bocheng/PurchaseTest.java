@@ -3,6 +3,7 @@ package se.bocheng;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.bocheng.pages.CartPage;
+import se.bocheng.pages.CheckoutInfoPage;
 import se.bocheng.pages.InventoryPage;
 import se.bocheng.pages.LoginPage;
 
@@ -28,8 +29,9 @@ public class PurchaseTest extends BaseTest {
         CartPage cartPage = new CartPage(driver);
         assertThat(cartPage.getItemCount()).isEqualTo(1);
         cartPage.checkOut();
-
-
+        CheckoutInfoPage checkoutInfoPage = new CheckoutInfoPage(driver);
+        checkoutInfoPage.fillInformation("Hemming","Cheng","72345");
+        checkoutInfoPage.clickContinue();
     }
 
 }
