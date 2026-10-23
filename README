@@ -1,0 +1,33 @@
+PROJECT NAME:
+End-to-end UI automation testing for the Sauce Demo website
+
+TECH STACK:
+Java25, Maven (Maven Wrapper), Selenium WebDriver, JUnit(Jupiter), AssertJ, Page Object Model
+
+TEST COVERAGE:
+1. Smoke test
+2. Login: valid login + 4 negative cases (parameterized)
+3. Product sorting: name A-Z / Z-A, price low-high/high-low
+4. Cart: badge count, remove from cart parge, remove from inventory page
+5. End-to-end purchase flow
+
+PROJECT STRUCTURE:
+All Page Objects are in pages folder, and each Page is a calss;
+BaseTest is for start and close browser;
+All tests is classified by functions.
+
+HOW TO RUN:
+Prerequisites: JDK 25 and Chrome
+Command: ./mvnw test (mvnw.cmd test on Windows)
+
+TEST DESIGN NOTES:
+* Using equivalence class partitioning for reverse engineering of login tests
+
+* A–Z sorting tests should first switch to Z–A to avoid
+"tests passing even when the functionality is broken"
+
+* Using explicit waits instead of Thread.sleep, and
+how to discover and fix unstable tests (such as the Chrome password pop-up issue).
+
+WORK IN PROGRESS:
+Checkout tests, screenshots of failures, headless mode, GitHub Actions, and bugs discovered using problem_user.
