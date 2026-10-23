@@ -11,6 +11,7 @@ public class CartPage {
     private final WebDriver driver;
     private final By cartItems = By.className("cart_item");
     private final By checkoutButton = By.cssSelector("[data-test='checkout']");
+    private final By removeBikeLightButton = By.id("remove-sauce-labs-bike-light");
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
@@ -24,6 +25,10 @@ public class CartPage {
 
     public void checkout() {
         driver.findElement(checkoutButton).click();
+    }
+
+    public void removeBikeLight() {
+        driver.findElement(removeBikeLightButton).click();
     }
 
 

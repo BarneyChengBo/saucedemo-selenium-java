@@ -19,6 +19,9 @@ public class InventoryPage {
     private final By sortDropdown = By.cssSelector("[data-test='product-sort-container']");
     private final By productNames = By.cssSelector("[data-test='inventory-item-name']");
     private final By productPrices = By.cssSelector("[data-test='inventory-item-price']");
+    private final By bikeLightAddToCartButton = By.id("add-to-cart-sauce-labs-bike-light");
+    private final By cartBadge = By.cssSelector("[data-test='shopping-cart-badge']");
+    private final By removeBikeLightButton = By.id("remove-sauce-labs-bike-light");
 
 
     public InventoryPage(WebDriver driver) {
@@ -66,6 +69,20 @@ public class InventoryPage {
             prices.add(price);
         }
         return prices;
+    }
+
+    public void addBikeLightToCart() {
+        driver.findElement(bikeLightAddToCartButton).click();
+    }
+
+    public int getCartBadgeCount() {
+        String cartBadgeText = driver.findElement(cartBadge).getText();
+        int cartBadgeCount = Integer.parseInt(cartBadgeText);
+        return cartBadgeCount;
+    }
+
+    public void removeBikeLight() {
+        driver.findElement(removeBikeLightButton).click();
     }
 
 
