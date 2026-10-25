@@ -34,10 +34,10 @@ On Windows: `mvnw.cmd test`
 - The page is sorted A–Z by default, so the A–Z sorting test first switches to Z–A. Otherwise the test would pass even if sorting were broken.
 - Explicit waits are used instead of `Thread.sleep`.
 - Flaky tests were investigated by repeating test runs. One root cause was Chrome's password breach popup blocking clicks, which is now disabled in `BaseTest`.
+- Bug reports for issues found with `problem_user`
 
 ## Work in progress
 
 - Checkout tests (required fields, order total)
 - Screenshots on failure and headless mode
 - CI with GitHub Actions
-- Bug reports for issues found with `problem_user`
