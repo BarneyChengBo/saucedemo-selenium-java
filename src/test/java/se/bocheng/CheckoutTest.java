@@ -1,17 +1,13 @@
 package se.bocheng;
 
 import org.junit.jupiter.api.BeforeEach;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.openqa.selenium.WebDriver;
-import se.bocheng.pages.CartPage;
-import se.bocheng.pages.CheckoutInfoPage;
-import se.bocheng.pages.InventoryPage;
-import se.bocheng.pages.LoginPage;
+import se.bocheng.pages.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 public class CheckoutTest extends BaseTest {
 
@@ -41,7 +37,6 @@ public class CheckoutTest extends BaseTest {
             "Chris, '', 12345, 'Error: Last Name is required'",
             "Chris, Zhang, '', 'Error: Postal Code is required'"
     })
-
     void missingRequiredFieldShowsErrorMessage(String firstName, String lastName, String postalCode, String expectedError) {
         checkoutInfoPage.fillInformation(firstName, lastName, postalCode);
         checkoutInfoPage.clickContinue();
@@ -50,5 +45,17 @@ public class CheckoutTest extends BaseTest {
         assertThat(errorMessage).isEqualTo(expectedError);
     }
 
+    @Test
+    void orderTotalEqualsSubtotalPlusTax() {
+        checkoutInfoPage.fillInformation("Chris", "Zhang", "12345");
+        checkoutInfoPage.clickContinue();
 
+        CheckoutOverviewPage checkoutOverviewPage = new CheckoutOverviewPage(driver);
+        double expectedSubtotal = 29.99;
+        double subtotal = checkoutOverviewPage.getSubtotal();
+        double tax = checkoutOverviewPage.getTax();
+        double total = checkoutOverviewPage.getTotal();
+        assertThat(subtotal).isEqualTo(expectedSubtotal);
+        assertThat(total).isCloseTo(tax + subtotal, within(0.001));
+    }
 }
