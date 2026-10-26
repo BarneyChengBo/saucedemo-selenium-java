@@ -36,6 +36,11 @@ On Windows: `mvnw.cmd test`
 - Flaky tests were investigated by repeating test runs. One root cause was Chrome's password breach popup blocking clicks, which is now disabled in `BaseTest`.
 - Bug reports for issues found with `problem_user`
 
+## Bug reports
+
+Exploratory testing with `problem_user` found several defects, including a blocking issue in checkout. 
+They are reported as [GitHub Issues](https://github.com/BarneyChengBo/saucedemo-selenium-java/issues) with steps to reproduce, expected and actual results, severity and screenshots.
+
 ## Work in progress
 
 - Checkout tests (required fields, order total)
