@@ -15,7 +15,6 @@ public abstract class BaseTest {
 
     @BeforeEach
     void startBrowser() {
-
         // Disable Chrome password manager to prevent the "Change your password" popup from blocking clicks
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("credentials_enable_service", false);
@@ -24,6 +23,14 @@ public abstract class BaseTest {
 
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
+
+        // Run without a browser window when started with -Dheadless=true
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless" ,"false"));
+        if (headless) {
+            options.addArguments("--headless=new");
+            options.addArguments("--window-size=1920,1080");
+        }
+
         driver = new ChromeDriver(options);
     }
 
