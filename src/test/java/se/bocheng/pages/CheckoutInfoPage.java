@@ -13,6 +13,7 @@ public class CheckoutInfoPage {
     private final By lastNameInput = By.id("last-name");
     private final By postalCodeInput = By.id("postal-code");
     private final By continueButton = By.cssSelector("[data-test='continue']");
+    private final By errorMessage = By.cssSelector("[data-test='error']");
 
     public CheckoutInfoPage(WebDriver driver) {
         this.driver = driver;
@@ -30,4 +31,12 @@ public class CheckoutInfoPage {
         driver.findElement(continueButton).click();
     }
 
+    public String getErrorMessage() {
+        return driver.findElement(errorMessage).getText();
+    }
+
+    public boolean isErrorDisplayed() {
+        return driver.findElement(errorMessage).isDisplayed();
+    }
 }
+
