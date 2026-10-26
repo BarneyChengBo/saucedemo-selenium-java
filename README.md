@@ -12,8 +12,9 @@ Java 25, Maven (Maven Wrapper), Selenium WebDriver, JUnit (Jupiter), AssertJ, Pa
 - **Login:** valid login and 4 negative cases (parameterized)
 - **Product sorting:** name A–Z / Z–A, price low–high / high–low
 - **Cart:** badge count, removing items from the cart page and from the inventory page
-- **End-to-end purchase flow:** from login to order confirmation
 - **Checkout:** required field validation (parameterized) and order total check
+- **End-to-end purchase flow:** from login to order confirmation
+
 
 ## Project structure
 
@@ -24,10 +25,20 @@ Java 25, Maven (Maven Wrapper), Selenium WebDriver, JUnit (Jupiter), AssertJ, Pa
 ## How to run
 
 Prerequisites: JDK 25 and Chrome
+
 ```
 ./mvnw test
 ```
+
 On Windows: `mvnw.cmd test`
+
+Run in headless mode (no browser window):
+
+```
+./mvnw test -Dheadless=true
+```
+
+On Windows: `mvnw.cmd test -Dheadless=true`
 
 ## Test design notes
 
@@ -35,7 +46,6 @@ On Windows: `mvnw.cmd test`
 - The page is sorted A–Z by default, so the A–Z sorting test first switches to Z–A. Otherwise the test would pass even if sorting were broken.
 - Explicit waits are used instead of `Thread.sleep`.
 - Flaky tests were investigated by repeating test runs. One root cause was Chrome's password breach popup blocking clicks, which is now disabled in `BaseTest`.
-- Bug reports for issues found with `problem_user`
 
 ## Bug reports
 
@@ -44,5 +54,5 @@ They are reported as [GitHub Issues](https://github.com/BarneyChengBo/saucedemo-
 
 ## Work in progress
 
-- Screenshots on failure and headless mode
+- Screenshots on failure
 - CI with GitHub Actions
