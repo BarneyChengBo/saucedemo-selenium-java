@@ -13,6 +13,7 @@ Java 25, Maven (Maven Wrapper), Selenium WebDriver, JUnit (Jupiter), AssertJ, Pa
 - **Product sorting:** name A–Z / Z–A, price low–high / high–low
 - **Cart:** badge count, removing items from the cart page and from the inventory page
 - **End-to-end purchase flow:** from login to order confirmation
+- **Checkout:** required field validation (parameterized) and order total check
 
 ## Project structure
 
@@ -43,6 +44,5 @@ They are reported as [GitHub Issues](https://github.com/BarneyChengBo/saucedemo-
 
 ## Work in progress
 
-- Checkout tests (required fields, order total)
 - Screenshots on failure and headless mode
 - CI with GitHub Actions
