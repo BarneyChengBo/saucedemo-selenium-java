@@ -21,6 +21,7 @@ Java 25, Maven (Maven Wrapper), Selenium WebDriver, JUnit (Jupiter), AssertJ, Pa
 - `pages/` – Page Objects, one class per page
 - `BaseTest` – handles browser setup and teardown
 - Test classes are organized by feature
+- `ScreenshotOnFailureExtension` – saves a screenshot to `target/screenshots/` when a test fails
 
 ## How to run
 
@@ -54,5 +55,4 @@ They are reported as [GitHub Issues](https://github.com/BarneyChengBo/saucedemo-
 
 ## Work in progress
 
-- Screenshots on failure
 - CI with GitHub Actions
