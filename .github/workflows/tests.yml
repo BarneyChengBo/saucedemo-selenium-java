@@ -33,3 +33,28 @@ jobs:
         with:
           name: screenshots
           path: target/screenshots/
+      - name: Generate Allure report
+        if: always()
+        run: ./mvnw allure:report
+
+      - name: Upload report for GitHub Pages
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+         path: target/site/allure-maven-plugin
+
+  deploy:
+    needs: test
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
