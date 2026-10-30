@@ -1,10 +1,12 @@
 # saucedemo-selenium-java
 
+[![Tests](https://github.com/BarneyChengBo/saucedemo-selenium-java/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/BarneyChengBo/saucedemo-selenium-java/actions/workflows/tests.yml)
+
 End-to-end UI test automation for the [Sauce Demo](https://www.saucedemo.com) website, built as part of my test automation portfolio.
 
 ## Tech stack
 
-Java 25, Maven (Maven Wrapper), Selenium WebDriver, JUnit (Jupiter), AssertJ, Page Object Model
+Java 25, Maven (Maven Wrapper), Selenium WebDriver, JUnit (Jupiter), AssertJ, Page Object Model, GitHub Actions
 
 ## Test coverage
 
@@ -41,6 +43,8 @@ Run in headless mode (no browser window):
 
 On Windows: `mvnw.cmd test -Dheadless=true`
 
+Tests run automatically on GitHub Actions for every push to main and every pull request.
+
 ## Test design notes
 
 - Negative login tests are designed with equivalence partitioning.
@@ -55,4 +59,3 @@ They are reported as [GitHub Issues](https://github.com/BarneyChengBo/saucedemo-
 
 ## Work in progress
 
-- CI with GitHub Actions
