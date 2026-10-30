@@ -10,7 +10,7 @@ public class SmokeTest extends BaseTest {
     void homePageHasCorrectTitle() {
         driver.get("https://www.saucedemo.com");
         String pageTitle = driver.getTitle();
-        assertThat(pageTitle).isEqualTo("Swag Labz");
+        assertThat(pageTitle).isEqualTo("Swag Labs");
     }
 
 }
